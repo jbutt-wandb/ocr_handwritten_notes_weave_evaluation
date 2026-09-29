@@ -1,0 +1,16 @@
+[project]
+name = "make-ocr-dataset"
+version = "0.1.0"
+description = "OCR eval dataset and model comparison for likho (jbutt-wandb/ocr_handwritten_notes)"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "ipykernel>=7.3.0",
+    "jiwer>=4.0.0",
+    "jupyter>=1.1.1",
+    "openai>=3.14.0",
+    "pandas>=3.0.5",
+    "pillow>=12.3.0",
+    "python-dotenv>=1.2.3",
+    "weave>=0.53.9",
+]
