@@ -1,7 +1,7 @@
 [project]
 name = "make-ocr-dataset"
 version = "0.1.0"
-description = "OCR eval dataset and model comparison for likho (jbutt-wandb/ocr_handwritten_notes)"
+description = "OCR eval dataset and model comparison for Kateb (jbutt-wandb/ocr_handwritten_notes)"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

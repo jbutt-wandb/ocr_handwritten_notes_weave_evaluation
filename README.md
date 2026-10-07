@@ -1,6 +1,6 @@
 # OCR Handwritten Notes - Evaluation
 
-OCR evaluation harness for **likho** ([jbutt-wandb/ocr_handwritten_notes](https://github.com/jbutt-wandb/ocr_handwritten_notes)), the handwritten-notes-to-Markdown app. This repo builds a ground-truth eval dataset from real handwritten note pages, then benchmarks the app's vision models against it — using the app's exact OCR prompt and predict path — with [W&B Weave](https://weave-docs.wandb.ai/).
+OCR evaluation harness for **Kateb** ([jbutt-wandb/ocr_handwritten_notes](https://github.com/jbutt-wandb/ocr_handwritten_notes)), the handwritten-notes-to-Markdown app. This repo builds a ground-truth eval dataset from real handwritten note pages, then benchmarks the app's vision models against it — using the app's exact OCR prompt and predict path — with [W&B Weave](https://weave-docs.wandb.ai/).
 
 ## What's here
 
@@ -12,15 +12,15 @@ OCR evaluation harness for **likho** ([jbutt-wandb/ocr_handwritten_notes](https:
 | `run_ocr_eval.ipynb` | Runs a Weave `Evaluation` over `ocr-eval` for each model in the app's registry, scores with jiwer, and publishes a leaderboard |
 | `scratchpad.ipynb` | Experiments / scratch work |
 
-## Relationship to likho
+## Relationship to Kateb
 
 The eval is deliberately faithful to the app so results transfer:
 
-- **Prompt** — vendored verbatim from likho's [`backend/prompts/ocr_prompts.py`](https://github.com/jbutt-wandb/ocr_handwritten_notes/blob/main/backend/prompts/ocr_prompts.py), assembled with `build_ocr_prompt(contains_latex=True, contains_diagrams=True)` and held constant across all models.
+- **Prompt** — sourced from the Weave prompt assets published in the project (`ocr-system-prompt`, `ocr-latex-instructions`, `ocr-diagram-instructions`, `ocr-output-instructions`), falling back to constants vendored from Kateb's [`backend/prompts/ocr_prompts.py`](https://github.com/jbutt-wandb/ocr_handwritten_notes/blob/main/backend/prompts/ocr_prompts.py) if an asset can't be fetched. Assembled with `build_ocr_prompt(contains_latex=True, contains_diagrams=True)` and held constant across all models.
 - **Models** — the app's registry of vision models served on [W&B Inference](https://docs.wandb.ai/guides/inference/) (Kimi K2.6 — the app default — plus Gemma 4 31B, Qwen 3.6 35B A3B, DeepSeek V4.1-Flash).
 - **Predict path** — mirrors the app's `OCRModel.predict`: images downscaled to a max dimension of 1600 px, strict JSON-schema response format (`{"markdown": ...}`), `max_tokens=32768`, and the app's `clean_markdown` post-processing.
 
-The only variable between eval runs is the model, so the Weave compare view is a direct answer to "which model should likho default to?"
+The only variable between eval runs is the model, so the Weave compare view is a direct answer to "which model should Kateb default to?"
 
 ## Scoring
 
